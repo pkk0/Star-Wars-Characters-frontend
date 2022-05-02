@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+    @apply text-4xl lg:text-6xl font-bold text-center;
+}
+
+.container {
+    @apply m-auto px-6;
+}
+
+.container-big {
+    @apply max-w-7xl;
+}
+
+.flex-centered {
+    @apply flex items-center justify-center;
+}
+
+tr {
+    @apply hover:bg-[#EEDB00] transition-colors hover:text-gray-900 bg-[#313131];
+}
+
+th {
+    @apply bg-[#1f1f1f] py-4 px-6 text-xl text-white sticky top-0;
+}
+
+td {
+    @apply py-3 px-2;
+}
+
+.button-flex {
+    @apply w-full flex-centered gap-2 whitespace-nowrap;
+}
