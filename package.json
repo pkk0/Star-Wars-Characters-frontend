@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.21.0",
+		"@square/svelte-store": "^0.1.1",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
