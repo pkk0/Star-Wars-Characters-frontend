@@ -1,16 +1,7 @@
 <script lang='ts'>
-    import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
-    import { planets, people, planetModal } from '$lib/stores';
+    import { people, planetModal } from '$lib/stores';
     import PeopleTableSearch from './PeopleTableSearch.svelte';
-
-    let loading = true;
-
-    onMount(async () => {
-        await planets.loadAll();
-        await people.loadAll();
-        loading = false;
-    });
 
     const openPlanetModal = (planetURL: string, button: EventTarget | null) => {
         if(button)
@@ -20,12 +11,12 @@
     }
 </script>
 
-{#if loading}
-<img src="/loading-spinner.svg" alt="" class="w-12 h-12 animate-spin" />
+{#await people.load?.()}
+<img src="/loading-spinner.svg" alt="" class="w-10 h-10 animate-spin" />
 <span class="py-4 text-xl font-medium">
     Loading, plase wait...
 </span>
-{:else}
+{:then}
 <div class="flex-1 w-full" transition:fade={{duration: 1200}}>
     <PeopleTableSearch />
     {#if $people.length == 0}
@@ -105,4 +96,11 @@
     </table>
     {/if}
 </div>
-{/if}
+{:catch}
+    <h2 class="text-5xl text-bold">Oops...</h2>
+    <span class="py-4 text-xl text-center">
+        The data could not be retrieved from the server.
+        <br class="hidden sm:block">
+        Try refreshing the page in a moment.
+    </span>
+{/await}
